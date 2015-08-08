@@ -20,16 +20,15 @@ public class GameTest {
         playerTwo = mock(Player.class);
         board = mock(Board.class);
         printStream = mock(PrintStream.class);
-
-        //game = new Game(board, player, playerTwo, printStream);
     }
 
     @Test
     public void shouldDrawBoardWhenGameIsPlayed() {
-        /*when(player.getAndValidateUserInput()).thenReturn(5);
-        when(player.getAndValidateUserInput()).thenReturn(7);*/
+        when(board.isMoveAvailable(5)).thenReturn(true);
+        when(player.getAndValidateUserInput()).thenReturn(5);
 
-        //mock buffered reader and when/thenReturn that?
+        when(board.isMoveAvailable(4)).thenReturn(true);
+        when(playerTwo.getAndValidateUserInput()).thenReturn(4);
 
         game = new Game(board, player, playerTwo, mock(PrintStream.class));
         game.playGame();
@@ -62,8 +61,13 @@ public class GameTest {
     }
 
     @Test
-    public void shouldReturnOtherPlayerWhenPlayersAreToggled() {
+    public void shouldReturnOtherPlayerWhenPlayersToggled() {
+        when(player.getSymbol()).thenReturn("X");
+        when(playerTwo.getSymbol()).thenReturn("O");
+
+        game = new Game(board, player, playerTwo, printStream);
         Player toggledPlayer = game.toggleCurrentPlayer(player);
-        assertThat(toggledPlayer, is(playerTwo));
+
+        assertThat(toggledPlayer.getSymbol(), is("O"));
     }
 }
