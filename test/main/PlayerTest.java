@@ -27,7 +27,7 @@ public class PlayerTest {
         when(reader.readLine()).thenReturn(Integer.toString(BOARD_SQUARE));
         Player player = new Player(reader, printStream, 1, "X");
 
-        Integer input = player.getUserInput();
+        Integer input = player.getAndValidateUserInput();
 
         assertThat(input, is(BOARD_SQUARE));
     }

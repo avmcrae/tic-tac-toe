@@ -21,7 +21,7 @@ public class Game {
         makeMove(currentPlayer);
     }
 
-    private Player makeMove(Player currentPlayer) {
+    public Player makeMove(Player currentPlayer) {
         Integer square = currentPlayer.getAndValidateUserInput();
 
         while (!board.isMoveAvailable(square)) {
@@ -35,7 +35,7 @@ public class Game {
         return toggleCurrentPlayer(currentPlayer);
     }
 
-    private Player toggleCurrentPlayer(Player current) {
+    public Player toggleCurrentPlayer(Player current) {
         return (current.equals(p1)) ? p2 : p1;
     }
 }
