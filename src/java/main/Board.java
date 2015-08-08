@@ -26,4 +26,13 @@ public class Board {
     public boolean isMoveAvailable(Integer square) {
         return boardStatus[square - 1].equals(" ");
     }
+
+    public boolean boardIsFull() {
+        for (String square : boardStatus) {
+            if (square.equals(" ")) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

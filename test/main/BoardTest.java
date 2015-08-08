@@ -89,4 +89,20 @@ public class BoardTest {
         Boolean moveIsAvailable = board.isMoveAvailable(3);
         assertTrue(moveIsAvailable);
     }
+
+    @Test
+    public void returnsTrueWhenBoardIsFull() {
+        String[] boardStatus = {"X", "O", "a", "O", "X", "O", "X", "X", "b"};
+        board = new Board(printStream, boardStatus);
+
+        assertTrue(board.boardIsFull());
+    }
+
+    @Test
+    public void shouldReturnBoardNotFullWhenOneEmptySquare() {
+        String[] boardStatus = {"X", "O", " ", "O", "X", "O", "X", "X", "b"};
+        board = new Board(printStream, boardStatus);
+
+        assertFalse(board.boardIsFull());
+    }
 }

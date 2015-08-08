@@ -16,9 +16,13 @@ public class Game {
     public void playGame() {
         board.drawBoard();
 
-        Player currentPlayer = p1;
-        currentPlayer = makeMove(currentPlayer);
-        makeMove(currentPlayer);
+        while (!board.boardIsFull()) {
+            Player currentPlayer = p1;
+            currentPlayer = makeMove(currentPlayer);
+            makeMove(currentPlayer);
+        }
+
+        printStream.println("Game is a draw");
     }
 
     public Player makeMove(Player currentPlayer) {

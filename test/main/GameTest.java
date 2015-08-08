@@ -24,16 +24,12 @@ public class GameTest {
 
     @Test
     public void shouldDrawBoardWhenGameIsPlayed() {
-        when(board.isMoveAvailable(5)).thenReturn(true);
-        when(player.getAndValidateUserInput()).thenReturn(5);
-
-        when(board.isMoveAvailable(4)).thenReturn(true);
-        when(playerTwo.getAndValidateUserInput()).thenReturn(4);
+        when(board.boardIsFull()).thenReturn(true);
 
         game = new Game(board, player, playerTwo, mock(PrintStream.class));
         game.playGame();
 
-        verify(board, atLeast(1)).drawBoard();
+        verify(board).drawBoard();
     }
 
     @Test
@@ -69,5 +65,20 @@ public class GameTest {
         Player toggledPlayer = game.toggleCurrentPlayer(player);
 
         assertThat(toggledPlayer.getSymbol(), is("O"));
+    }
+
+    @Test
+    public void shouldInformUserWhenBoardIsFull() {
+        for (int i = 1; i < 10; i++) {
+            when(board.isMoveAvailable(i)).thenReturn(true);
+
+            if (i % 2 == 0) { when(playerTwo.getAndValidateUserInput()).thenReturn(i); }
+            else { when(player.getAndValidateUserInput()).thenReturn(i); }
+        }
+
+        game = new Game(board, player, playerTwo, printStream);
+        game.playGame();
+
+        verify(printStream).println(contains("Game is a draw"));
     }
 }
