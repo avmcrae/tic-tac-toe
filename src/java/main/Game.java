@@ -1,30 +1,38 @@
-import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class Game {
     private Board board;
     private Player p1;
     private Player p2;
+    private PrintStream printStream;
 
-    public Game(Board board, Player player, Player player2) {
+    public Game(Board board, Player player, Player player2, PrintStream printStream) {
         this.board = board;
         this.p1 = player;
         this.p2 = player2;
+        this.printStream = printStream;
     }
 
     public void playGame() {
         board.drawBoard();
 
         Player currentPlayer = p1;
+        currentPlayer = makeMove(currentPlayer);
+        makeMove(currentPlayer);
+    }
 
-        Integer square = p1.getUserInput();
-        board.move(square, p1.getSymbol()); //is passing two player params to board the best approach?
-        board.drawBoard();
-        toggleCurrentPlayer(currentPlayer);
+    private Player makeMove(Player currentPlayer) {
+        Integer square = currentPlayer.getAndValidateUserInput();
 
-        square = p2.getUserInput();
-        board.move(square, p2.getSymbol()); //is passing two player params to board the best approach?
+        while (!board.isMoveAvailable(square)) {
+            printStream.println("Location already taken.");
+            square = currentPlayer.getAndValidateUserInput();
+        }
+
+        board.move(square, currentPlayer.getSymbol()); //is passing two player params to board the best approach?
         board.drawBoard();
+
+        return toggleCurrentPlayer(currentPlayer);
     }
 
     private Player toggleCurrentPlayer(Player current) {

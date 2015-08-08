@@ -13,7 +13,7 @@ public class Main {
         Player playerOne = new Player(reader, printStream, 1, "X");
         Player playerTwo = new Player(reader, printStream, 2, "O");
 
-        Game game = new Game(board, playerOne, playerTwo);
+        Game game = new Game(board, playerOne, playerTwo, printStream);
         game.playGame();
     }
 }

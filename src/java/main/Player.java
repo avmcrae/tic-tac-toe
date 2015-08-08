@@ -15,10 +15,10 @@ public class Player {
         this.symbol = symbol;
     }
 
-    public Integer getUserInput() {
-        printStream.println("Please enter a number between 1 and 9, Player " + playerNumber + ":");
+    public Integer getAndValidateUserInput() {
+        printStream.println("Please enter an available square between 1 and 9, Player " + playerNumber + ":");
         try {
-            return  Integer.parseInt(reader.readLine());
+            return Integer.parseInt(reader.readLine());
         } catch(NumberFormatException e) {
             printStream.println("Please only enter a number");
         } catch (IOException e) {

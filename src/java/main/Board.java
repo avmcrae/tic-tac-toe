@@ -18,6 +18,12 @@ public class Board {
     }
 
     public void move(int squareNumber, String symbol) {
-        boardStatus[squareNumber - 1] = symbol;
+        if (isMoveAvailable(squareNumber)) {
+            boardStatus[squareNumber - 1] = symbol;
+        }
+    }
+
+    public boolean isMoveAvailable(Integer square) {
+        return boardStatus[square - 1].equals(" ");
     }
 }

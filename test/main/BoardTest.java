@@ -60,7 +60,7 @@ public class BoardTest {
 
     //name could be better
     @Test
-    public void putsCorrectSymbolOnBoardWhenInputInMove() {
+    public void shouldPutCorrectSymbolOnBoardWhenInputInMove() {
         board.move(9, "O");
         board.move(4, "X");
         board.drawBoard();
@@ -70,5 +70,23 @@ public class BoardTest {
                 " X |   | \n" +
                 "---------\n" +
                 "   |   |O\n");
+    }
+
+    @Test
+    public void shouldReturnFalseWhenMoveIsAlreadyTakenBySymbol() {
+        String[] boardStatus = {" ", " ", "X", " ", " ", " ", " ", " ", " "};
+        board = new Board(printStream, boardStatus);
+
+        Boolean moveIsAvailable = board.isMoveAvailable(3);
+        assertFalse(moveIsAvailable);
+    }
+
+    @Test
+    public void shouldReturnTrueWhenMoveIsAvailable() {
+        String[] boardStatus = {" ", " ", " ", " ", "X", " ", " ", "X", " "};
+        board = new Board(printStream, boardStatus);
+
+        Boolean moveIsAvailable = board.isMoveAvailable(3);
+        assertTrue(moveIsAvailable);
     }
 }
