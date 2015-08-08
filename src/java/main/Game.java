@@ -16,16 +16,16 @@ public class Game {
     public void playGame() {
         board.drawBoard();
 
+        Player currentPlayer = p1;
         while (!board.boardIsFull()) {
-            Player currentPlayer = p1;
-            currentPlayer = makeMove(currentPlayer);
             makeMove(currentPlayer);
+            currentPlayer = toggleCurrentPlayer(currentPlayer);
         }
 
         printStream.println("Game is a draw");
     }
 
-    public Player makeMove(Player currentPlayer) {
+    public void makeMove(Player currentPlayer) {
         Integer square = currentPlayer.getAndValidateUserInput();
 
         while (!board.isMoveAvailable(square)) {
@@ -36,7 +36,7 @@ public class Game {
         board.move(square, currentPlayer.getSymbol()); //is passing two player params to board the best approach?
         board.drawBoard();
 
-        return toggleCurrentPlayer(currentPlayer);
+        //return toggleCurrentPlayer(currentPlayer);
     }
 
     public Player toggleCurrentPlayer(Player current) {

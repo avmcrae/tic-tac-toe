@@ -34,6 +34,8 @@ public class GameTest {
 
     @Test
     public void shouldInformUserThatLocationIsTakenWhenItIsUnavailable() {
+        board = mock(Board.class); //reset board
+
         when(board.isMoveAvailable(3)).thenReturn(false);
         when(board.isMoveAvailable(4)).thenReturn(true);
 
