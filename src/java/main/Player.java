@@ -31,4 +31,9 @@ public class Player {
     public String getSymbol() {
         return this.symbol;
     }
+
+    @Override
+    public String toString() {
+        return "Player " + playerNumber;
+    }
 }

@@ -19,6 +19,12 @@ public class Game {
         Player currentPlayer = p1;
         while (!board.boardIsFull()) {
             makeMove(currentPlayer);
+
+            if (board.threeInARow(currentPlayer.getSymbol())) {
+                printStream.println(currentPlayer.toString() + " Wins!");
+                return;
+            }
+
             currentPlayer = toggleCurrentPlayer(currentPlayer);
         }
 
@@ -35,8 +41,6 @@ public class Game {
 
         board.move(square, currentPlayer.getSymbol()); //is passing two player params to board the best approach?
         board.drawBoard();
-
-        //return toggleCurrentPlayer(currentPlayer);
     }
 
     public Player toggleCurrentPlayer(Player current) {

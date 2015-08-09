@@ -105,4 +105,35 @@ public class BoardTest {
 
         assertFalse(board.boardIsFull());
     }
+
+    @Test
+    public void shouldReturnTrueIfThreeInARowOnBoardAsAColumn() {
+        String[] boardStatus = {"X", "X", " ",
+                                "O", "X", "O",
+                                "X", "X", "O"};
+        board = new Board(printStream, boardStatus);
+
+        assertTrue(board.threeInARow("X"));
+    }
+
+   @Test
+    public void shouldReturnTrueIfThreeInARowOnBoardAsARow() {
+        String[] boardStatus = {"O", "X", "X",
+                                "X", "O", "X",
+                                "O", "O", "O"};
+        board = new Board(printStream, boardStatus);
+
+        assertTrue(board.threeInARow("O"));
+    }
+
+    @Test
+    public void shouldReturnTrueIfThreeInARowOnBoardAsADiagonal() {
+        String[] boardStatus = {"X", "X", "O",
+                                "O", "X", "O",
+                                "X", "O", "X"};
+
+        board = new Board(printStream, boardStatus);
+
+        assertTrue(board.threeInARow("X"));
+    }
 }

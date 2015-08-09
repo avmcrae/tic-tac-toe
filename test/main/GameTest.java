@@ -71,16 +71,25 @@ public class GameTest {
 
     @Test
     public void shouldInformUserWhenBoardIsFull() {
-        for (int i = 1; i < 10; i++) {
-            when(board.isMoveAvailable(i)).thenReturn(true);
-
-            if (i % 2 == 0) { when(playerTwo.getAndValidateUserInput()).thenReturn(i); }
-            else { when(player.getAndValidateUserInput()).thenReturn(i); }
-        }
+        when(board.boardIsFull()).thenReturn(true);
 
         game = new Game(board, player, playerTwo, printStream);
         game.playGame();
 
         verify(printStream).println(contains("Game is a draw"));
+    }
+
+    @Test
+    public void shouldInformUserWhenThreeInARowFoundAndAPlayerWins() {
+        when(board.isMoveAvailable(0)).thenReturn(true);
+        when(player.getAndValidateUserInput()).thenReturn(0);
+        when(player.getSymbol()).thenReturn("X");
+        when(board.threeInARow("X")).thenReturn(true);
+
+        game = new Game(board, player, playerTwo, printStream);
+        game.playGame();
+
+        verify(printStream).println(contains("Player"));
+        verify(printStream).println(contains("Wins"));
     }
 }
